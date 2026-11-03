@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="This entity houses the data from the Mainframe for Physical Risk"
+  entity="HumanRisk_Ext"
+  exportable="true"
+  extendable="true"
+  final="false"
+  table="humanrisk_ext"
+  type="retireable">
+  <implementsEntity
+    name="Validatable"/>
+  <implementsInterface
+    iface="gw.api.history.CustomHistory"
+    impl="za.co.santam.api.history.HumanRiskCustomHistoryImpl"/>
+  <column
+    desc="Unique code assigned to Human Risk Record"
+    name="Code"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="This is the ID Number of the person."
+    name="IDNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="13"/>
+  </column>
+  <typekey
+    desc="The reason the Human Risk was loaded to the file"
+    name="HumanRiskReason"
+    nullok="true"
+    typelist="HumanRiskReason_Ext"/>
+  <column
+    desc="This is the Name of the person."
+    name="PersonsName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="48"/>
+  </column>
+  <typekey
+    desc="The language of the person"
+    name="Language"
+    nullok="true"
+    typelist="LanguageType"/>
+  <column
+    desc="Description of the circumstances that lead to the person being added."
+    name="Circumstances"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="The code of the branch that identified the person as a risk"
+    name="Branch"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="3"/>
+  </column>
+  <column
+    desc="The broker group that identified the person as a risk"
+    name="BrokerGroup"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="4"/>
+  </column>
+  <column
+    desc="Date on which record was entered"
+    name="EnteredDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Date on which record starts"
+    name="StartDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Date on which record expire"
+    name="EndDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="The id of the person that entered this record"
+    name="UserId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+  <typekey
+    desc="The Nationality of the person as a risk"
+    name="Nationality"
+    nullok="true"
+    typelist="Country"/>
+  <index
+    desc="Performance index for ID Number"
+    name="IDNumber_Index"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IDNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <column
+    desc="Date on which passport expires"
+    name="PassportExpiryDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Date of birth"
+    name="DateOfBirth"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="This is the Passport Number of the person."
+    name="PassportNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="13"/>
+  </column>
+  <column
+    desc="Producer Number"
+    name="AccountHolder"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Registration Number"
+    name="CompanyRegNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Company Name"
+    name="CompanyName"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="HumanRiskContactDetail_Ext"
+    cascadeDelete="true"
+    desc="Contact details of the Human Risk"
+    name="HumanRiskContactDetails"
+    owner="true"
+    triggersValidation="true"/>
+</entity>

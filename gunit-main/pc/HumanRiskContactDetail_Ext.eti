@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Contact details captured for a Human Risk"
+  entity="HumanRiskContactDetail_Ext"
+  exportable="true"
+  extendable="true"
+  final="false"
+  table="humanriskcontactdetail_ext"
+  type="retireable">
+  <foreignkey
+    fkentity="HumanRisk_Ext"
+    name="HumanRisk"
+    nullok="false"/>
+  <column
+    desc="Specific information captured based on the Type of Contact."
+    name="ContactInformation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="The date it was added or modified"
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The User who added/removed this record"
+    name="ModifiedByUser"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <typekey
+    desc="The type of contact information that is added"
+    name="TypeOfContactDetail"
+    nullok="false"
+    typelist="HumanRiskContactType_Ext"/>
+  <index
+    desc="Human Risk Performance Index"
+    name="hr_perf_idx">
+    <indexcol
+      keyposition="1"
+      name="TypeOfContactDetail"/>
+    <indexcol
+      keyposition="2"
+      name="ContactInformation"/>
+  </index>
+</entity>
